@@ -5,17 +5,12 @@ Aquí recopilo los que me aportaron mayor valor académico y profesional.
 
 ---
 
-## 📂 Estructura del Repositorio  
+## 📂 Estructura del Repositorio
 
-Proyectos-UTN
-│
-├── RedesDeDatos
-│ ├── RED_2025_ConfiguraciónVLAN
-│
-├── IngenieriaCalidadDeSoftware
-│
-├── TecnologiasParaLaAutomatización
-
+- **RedesDeDatos**
+  - RED_2025_ConfiguraciónVLAN
+- **IngenieriaCalidadDeSoftware**
+- **TecnologiasParaLaAutomatización**
 ---
 
 ## 📖 Glosario  
