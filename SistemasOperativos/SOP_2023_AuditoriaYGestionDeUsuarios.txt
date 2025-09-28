@@ -1,4 +1,8 @@
 # Proyecto 1 : Auditoria y Gestion de Usuarios
+
+La actividad consiste en elaborar un script para la terminal GNU/LINUX utilizando una maquina virutal como VB de Oracle.
+El script tendra un menu de opciones que podra llevar a cabo las siguientes instrucciones
+
 1) Agregar un usuario al grupo Facilitadores.
 2) Agregar un usuario al grupo Expositores.
 3) Agregar un usuario al grupo Directivos.
@@ -16,3 +20,4 @@ datos:
   opción elegio (de la 1 a la 9) que resumenes genero (de la A a la E) y fecha y
   hora.
 9) Salir
+
