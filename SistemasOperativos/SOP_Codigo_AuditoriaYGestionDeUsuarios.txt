@@ -1,0 +1,295 @@
+#Proyecto1
+
+#!bin/bash
+
+hora=`date +%H:%M`
+usuario=`whoami`
+echo "$hora|$usuario" >> ingresos
+
+while true
+do
+echo "Bienvenido al script de manejo de usuarios, por favor elija una opcion"
+echo "1) Agregar un usuario al grupo Facilitadores"
+echo "2) Agregar un usuario al grupo Expositores"
+echo "3) Agregar un usuario al grupo Directivos"
+echo "4) Cambiar los atributos de un usuario"
+echo "5) Eliminar un usuario independientemente de su grupo"
+echo "6) Mostrar los atributos de un usuario"
+echo "7) Generar resumen de funcionamiento general del sistema "
+echo "8) Salir"
+read opcion
+echo "$opcion" >> ingresos
+if test $opcion -eq 1
+then
+
+	existe=0
+	echo "Ingrese el nombre de usuario que desea agregar"
+	read usuario
+	for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+	do
+		if test $i = $usuario 
+		then
+			echo "Usuario encontrado"
+			existe=1
+			break
+		fi
+
+	done
+	if test $existe -eq 1
+	then
+		echo "Perfecto, agregando usuario"
+		sudo usermod -a -G 200 $usuario	
+
+	else
+		echo "Lo siento, ese usuario no existe"
+	fi
+
+elif test $opcion -eq 2
+then
+
+existe=0
+echo "Ingrese el nombre de usuario que desea agregar"
+        read usuario
+        for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+        do
+                if test $i = $usuario 
+                then
+                        echo "Usuario encontrado"
+                        existe=1
+                        break
+                fi
+
+        done
+        if test $existe -eq 1
+        then
+                echo "Perfecto, agregando usuario"
+                sudo usermod -a -G 300 $usuario      
+
+        else
+                echo "Lo siento, ese usuario no existe"
+        fi
+
+elif test $opcion -eq 3
+then
+	existe=0
+	echo "Ingrese el nombre de usuario que desea agregar"
+        read usuario
+        for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+        do
+                if test $i = $usuario 
+                then
+                        echo "Usuario encontrado"
+                        existe=1
+                        break
+                fi
+
+        done
+        if test $existe -eq 1
+        then
+                echo "Perfecto, agregando usuario"
+                sudo usermod -a -G 400 $usuario
+		numerogruposudo=`grep sudo /etc/group | tr ":" " " |cut -f3 -d" "`
+		sudo usermod -a -G $numerogruposudo $usuario 
+
+
+        else
+                echo "Lo siento, ese usuario no existe"
+        fi
+
+
+
+elif test $opcion -eq 4
+then
+
+echo "Ingrese al usuario que desea modificar los atributos"
+existe=0
+read usuario
+        for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+        do
+                if test $i = $usuario 
+                then
+                        echo "Usuario encontrado"
+                        existe=1
+                        break
+                fi
+
+        done
+        if test $existe -eq 1
+        then
+		echo "Eliga el atributo que desea modificar"
+		echo "A) Password"
+		echo "B) Shell "
+		echo "C) Directorio de inicio"
+		echo "D) Nombre"
+		echo "E) Grupo principal"
+		read opcion
+
+		echo "$opcion" >> ingresos
+
+		case $opcion in
+
+		a|A)
+		sudo passwd $usuario
+
+		;;
+
+		b|B)
+		echo "Ingrese el nuevo shell que desea asignar al usuario"
+		read shell
+		sudo chsh -s $shell $usuario
+
+		;;
+
+		c|C)
+		echo "Ingrese el nuevo directorio"
+		read directorio
+		sudo usermod -d $directorio $usuario
+		;;
+
+		d|D)
+		echo "Ingrese el nuevo nombre para el usuario"
+		read nombre
+		sudo chfn -f $nombre $usuario
+
+		;;
+
+		e|E)
+		echo "Ingrese el nuevo nombre del grupo principal"
+		read grupo
+		sudo usermod -g  $grupo $usuario
+		;;
+		*)
+		echo "Lo siento, no ha elegido una opcion correcta"
+		esac
+
+        else
+                echo "Lo siento, no existe ese usuario"
+        fi
+
+
+
+
+elif test $opcion -eq 5
+then
+	existe=0
+        echo "Ingrese el nombre de usuario que desea eliminar"
+        read usuario
+        for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+        do
+                if test $i = $usuario
+                then
+                        echo "Usuario encontrado"
+                        existe=1
+                        break
+                fi
+
+        done
+        if test $existe -eq 1
+        then
+		echo "Eliminando usuario"
+                sudo userdel $usuario 
+
+        else
+                echo "Lo siento, ese usuario no existe"
+
+	fi
+
+
+elif test $opcion -eq 6
+then
+
+
+
+existe=0
+        echo "Ingrese el nombre de usuario "
+        read usuario
+        for i in `cat /etc/passwd | tr -s ":" " " | cut -f1 -d" "`
+        do
+                if test $i = $usuario 
+                then
+                        echo "Usuario encontrado"
+                        existe=1
+                        break
+                fi
+
+        done
+        if test $existe -eq 1
+        then
+                grep $usuario /etc/passwd 
+
+        else
+                echo "Lo siento, ese usuario no existe"
+	fi
+
+
+
+elif test $opcion -eq 7
+then
+
+echo "Eliga el resumen que desea generar"
+echo "A) Cantidad de usuarios conectados en el sistema"
+echo "B) Conexion a internet"
+echo "C) Espacio disponible en disco"
+echo "D) Rendimiento del sistema"
+echo "E) Sistemas de archivos montados"
+read opcion
+echo "$opcion" >> ingresos
+case $opcion in
+A|a)
+	echo "\nUsuarios existenes en el sistema"
+	cat /etc/passwd | wc -l	
+;;
+b|B)
+	echo "Detectando conexion a internet, aguarde unos segundos porfavor: "
+	ping -c 1 google.com > internet
+	conexion=0
+	archivointernetlineas=`cat internet |wc -l`
+	if test $archivointernetlineas -gt 1
+	then
+		conexion=1
+
+	fi
+
+	if test $conexion -eq 1
+	then 
+		echo "Si hay conexion a internet"
+	else
+		echo "No hay conexion a internet"
+	fi
+
+;;
+c|C)
+	primeravuelta=0
+	for i in `df -m | tr -s " " | cut -f4 -d" " `
+	do
+		primeravuelta=`expr $primeravuelta + 1`
+		if test $primeravuelta -gt 1
+		then
+		discodisponible=`expr $discodisponible + $i`
+		fi
+	done
+	echo "El espacio libre total en disco es $discodisponible MB"
+;;
+d|D)
+
+	echo "Informe de memoria y uso de cpu\n"
+	vmstat
+;;
+E|e)
+	echo "Sistemas de archivos montados"
+	mount	
+;;
+*)
+echo "No ha elegido una opcion valida"
+;;
+esac
+
+elif test $opcion -eq 8
+then
+	echo "Adios"
+	exit 1
+
+else
+	echo "No ha elegido una opcion correcta"
+fi
+done
