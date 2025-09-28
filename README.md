@@ -21,6 +21,8 @@ Aquí recopilo los que me aportaron mayor valor académico y profesional.
 | **RED**    | Redes de Información                     |
 | **TA**     | Tecnologías para la Automatización        |
 | **TP**     | Trabajo Práctico                         |
+| **SOP**     | Sistemas Operativos                         |
+
 
 ---
 
@@ -29,6 +31,8 @@ Aquí recopilo los que me aportaron mayor valor académico y profesional.
 | **Ítem**                         | **Regla de Nombrado**                           |
 |----------------------------------|-------------------------------------------------|
 | **Trabajo Práctico**             | `<SiglasMateria>_<Año>_<NombreTP>.pdf`          |
-| **Instructivo o Recurso Extra**  | `<SiglasMateria>_<Instructivo>_<NombreTP>.pdf`  |
+| **Instructivo o Recurso Extra**  | `<SiglasMateria>_Instructivo_<NombreTP>.pdf`  |
+| **Codigo fuente**  | `<SiglasMateria>_Codigo_<NombreTP>.pdf`  |
+
 
 ---
