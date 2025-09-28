@@ -16,9 +16,6 @@ Proyectos-UTN
 │
 ├── TecnologiasParaLaAutomatización
 
-ruby
-Copy code
-
 ---
 
 ## 📖 Glosario  
